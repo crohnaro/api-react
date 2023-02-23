@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-
 import { deepPurple, red } from "@material-ui/core/colors";
 
 import "./index.css";
