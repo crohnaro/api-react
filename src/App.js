@@ -1,18 +1,17 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Home from './pages/Home';
-import TemplateDefault from './templates/Default/Default'
+import Customers from "./pages/Customers";
+import Home from "./pages/Home";
+import TemplateDefault from "./templates/Default/Default";
 
-
-const App =() => {
+const App = () => {
   return (
     <TemplateDefault>
       <Router>
         <Switch>
+          <Route path="/customers">
+            <Customers />
+          </Route>
           <Route path="/">
             <Home />
           </Route>
@@ -20,6 +19,6 @@ const App =() => {
       </Router>
     </TemplateDefault>
   );
-}
+};
 
 export default App;
