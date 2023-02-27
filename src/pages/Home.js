@@ -1,10 +1,5 @@
-import Header from '../partials/Header/Header'
+const Home = () => {
+  return <h1>Home</h1>;
+};
 
-const Home =() => {
-    return (
-      <Header />
-    );
-  }
-  
-  export default Home;
-  
+export default Home;
