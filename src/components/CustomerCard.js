@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -22,11 +23,12 @@ const CustomersCard = ({
     lastname,
     email,
     avatar,
+    className,
 }) => {
   const classes = useStyles()
 
   return (
-    <Card className={classes.root}>
+    <Card className={classNames(className, classes.root)}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" src={avatar}>
