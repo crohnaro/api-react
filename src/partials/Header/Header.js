@@ -17,6 +17,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home"
+import PersonAddIcon from "@material-ui/icons/PersonAdd"
 
 const useStyles = makeStyles(() => ({
   tittle: {
@@ -62,7 +63,7 @@ const Header = () => {
           <ListItemText>Home</ListItemText>
         </ListItem>
         <ListItem>
-          <ListItemIcon></ListItemIcon>
+          <ListItemIcon><PersonAddIcon /></ListItemIcon>
           <ListItemText>Cadastro de Clientes</ListItemText>
         </ListItem>
       </Drawer>
