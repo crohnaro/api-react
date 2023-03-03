@@ -15,6 +15,8 @@ import {
 
 import { makeStyles } from "@material-ui/core/styles";
 
+import { useHistory } from "react-router-dom";
+
 import MenuIcon from "@material-ui/icons/Menu";
 import HomeIcon from "@material-ui/icons/Home"
 import PersonAddIcon from "@material-ui/icons/PersonAdd"
@@ -30,11 +32,17 @@ const useStyles = makeStyles(() => ({
 
 const Header = () => {
   const classes = useStyles()
+  const history = useHistory({forceRefresh: true})
 
   const [menuOpen, setMenuOpen] = useState(false)
-
+  
   const handleToggleMenu = () => {
     setMenuOpen(!menuOpen)
+  }
+
+  const handleMenuClick = route => {
+    history.push(route)
+    handleToggleMenu()
   }
 
   return (
@@ -58,14 +66,18 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       <Drawer open={menuOpen} onClose={() => handleToggleMenu()}>
-        <ListItem>
-          <ListItemIcon><HomeIcon /></ListItemIcon>
-          <ListItemText>Home</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemIcon><PersonAddIcon /></ListItemIcon>
-          <ListItemText>Cadastro de Clientes</ListItemText>
-        </ListItem>
+        <List>
+          <ListItem button onClick={() => handleMenuClick("/")}>
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
+          <ListItem button onClick={() => handleMenuClick("/customers")}>
+            <ListItemIcon><PersonAddIcon /></ListItemIcon>
+            <ListItemText>Cadastro de Clientes</ListItemText>
+          </ListItem>
+          </List>
       </Drawer>
     </>
 
