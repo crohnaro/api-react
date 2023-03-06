@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CustomersCard = ({
+    id,
     name,
     lastname,
     email,
@@ -37,8 +38,9 @@ const CustomersCard = ({
     setOpenModal(!openModal)
   }
 
-  const handleConfirmModal = () => {
-    onRemoveCustomer()
+  const handleConfirmModal = id => {
+    onRemoveCustomer(id)
+    handleToggleOpenModal()
   }
 
   const handleRemoveCustomer = () => {
@@ -70,7 +72,7 @@ const CustomersCard = ({
       <Modal 
       open={openModal}
       onClose={handleToggleOpenModal}
-      onConfirm={handleConfirmModal}
+      onConfirm={() => handleConfirmModal(id)}
       title="Deseja excluir esse cadastro?"
       message="Fazendo essa ação, não sera possivel desfazer"
       />
