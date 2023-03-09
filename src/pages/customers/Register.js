@@ -1,11 +1,12 @@
 import { useState } from "react";
 
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import  {TextField, Button} from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
 import axios from "axios";
+
+import Toasty from "../../components/Toasty";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -111,6 +112,7 @@ const Register = () => {
           Cadastrar
         </Button>
       </div>
+      <Toasty open severity="error" text="Cadastro realizado" />
     </>
   );
 };
