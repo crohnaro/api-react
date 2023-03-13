@@ -29,6 +29,7 @@ const CustomersCard = ({
     avatar,
     className,
     onRemoveCustomer,
+    onEditCustomer,
 }) => {
   const classes = useStyles()
 
@@ -47,6 +48,10 @@ const CustomersCard = ({
     handleToggleOpenModal()
   }
 
+  const handleEditCustomer = id => {
+    onEditCustomer(id)
+  }
+
   return (
     <>
       <Card className={classNames(className, classes.root)}>
@@ -61,7 +66,7 @@ const CustomersCard = ({
           subheader={email}
         />
         <CardActions disableSpacing>
-          <IconButton aria-label="editar cadastro">
+          <IconButton aria-label="editar cadastro" onClick={() => handleEditCustomer(id)}>
             <EditIcon />
           </IconButton>
           <IconButton aria-label="remover cadastro" onClick={handleRemoveCustomer}>
