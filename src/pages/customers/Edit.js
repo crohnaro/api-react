@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import  {TextField, Button} from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -8,7 +8,7 @@ import axios from "axios";
 
 import Toasty from "../../components/Toasty";
 
-import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   wrapper: {
@@ -17,31 +17,39 @@ const useStyles = makeStyles((theme) => ({
 }));
 const Edit = () => {
   const classes = useStyles();
-  const { id } = useParams()
-
-  const [user, setUser] = useState({})
-
-  useEffect(() => {
-    axios.get(`https://reqres.in/api/users/${id}`)
-        .then(response =>{
-            const { data } = response.data
-            setUser(data)
-        })
-  })
+  const { id } = useParams();
 
   const [form, setForm] = useState({
     name: {
-      value: user.first_name,
+      value: '',
       error: false,
     },
     job: {
-      value: user.job,
+      value: '',
       error: false,
     },
   });
 
-  const [openToasty, setOpenToasty] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [openToasty, setOpenToasty] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    axios.get(`https://reqres.in/api/users/${id}`)
+        .then((response) => {
+        const { data } = response.data;
+
+        setForm({
+            name: {
+            value: data.first_name,
+            error: false,
+            },
+            job: {
+            value: data.job,
+            error: false,
+            },
+      });
+    });
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -55,7 +63,7 @@ const Edit = () => {
   };
 
   const handleRegisterButton = () => {
-    setIsLoading(true)
+    setIsLoading(true);
     let hasError = false;
 
     let newFormState = {
@@ -86,13 +94,15 @@ const Edit = () => {
       return setForm(newFormState);
     }
 
-    axios.post('https://reqres.in/api/users', {
-      name: form.name.value,
-      job: form.job.value,
-    }).then((response) => {
-      setOpenToasty(true)
-      setIsLoading(false)
-    })
+    axios
+      .put(`https://reqres.in/api/users/${id}`, {
+        name: form.name.value,
+        job: form.job.value,
+      })
+      .then((response) => {
+        setOpenToasty(true);
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -128,16 +138,14 @@ const Edit = () => {
           onClick={handleRegisterButton}
           disabled={isLoading}
         >
-          {
-            isLoading ? "Aguarde..." : "Salvar Alterações"
-          }
+          {isLoading ? "Aguarde..." : "Salvar Alterações"}
         </Button>
       </div>
-      <Toasty 
-      open={openToasty} 
-      severity="success" 
-      text="Registro atualizado com sucesso" 
-      onClose={() => setOpenToasty(false)}
+      <Toasty
+        open={openToasty}
+        severity="success"
+        text="Registro atualizado com sucesso"
+        onClose={() => setOpenToasty(false)}
       />
     </>
   );
