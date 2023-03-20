@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { deepPurple, red } from "@material-ui/core/colors";
 
+import { AuthProvider } from "./state/auth";
+
 import "./index.css";
 import App from "./App";
 
@@ -20,7 +22,9 @@ const theme = createMuiTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <App />
+      <AuthProvider>
+        <App />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
