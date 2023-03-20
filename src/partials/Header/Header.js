@@ -31,7 +31,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-const Header = () => {
+const Header = ({ user }) => {
   const classes = useStyles()
   const history = useHistory({forceRefresh: true})
 
@@ -63,7 +63,11 @@ const Header = () => {
           <Typography variant="h6" component="div" className={classes.tittle}>
             News
           </Typography>
-          <Button color="inherit">Login</Button>
+          {
+            user.logged
+            ? <Typography variant="h6">{user.email}</Typography>
+            : <Button color="inherit">Login</Button>
+          }
         </Toolbar>
       </AppBar>
       <Drawer open={menuOpen} onClose={() => handleToggleMenu()}>
